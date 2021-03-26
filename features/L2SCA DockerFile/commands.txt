@@ -1,0 +1,4 @@
+from this folder:
+
+docker build -t l2sca .
+docker container run -d -p 1234:1234 --name l2sca_container l2sca 
