@@ -9,4 +9,3 @@ def type_token_ratio(text):
     
     return len(unique_words)/len(all_words)
 
-print(type_token_ratio("hi , ,        hi this is a sentence"))
