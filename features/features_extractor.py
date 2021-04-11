@@ -21,14 +21,10 @@ def extract_features_from_text(text):
     # l2sca scores
     response['l2sca'] = l2sca
     response['words_per_t_unit'] = l2sca['W']/l2sca['T']
-    response['clauses_per_t_unit'] = l2sca['C/T']
     response['words_per_clauses'] = l2sca['W']/l2sca['C']
-    response['words_per_review'] = l2sca['W']
 
     # readability scores
     response['flesch_reading_ease'] = get_flesch_reading_ease(text)
-    response['smog_index'] = get_smog_index(text)
-    response['flesch_kincaid_grade'] = get_flesch_kincaid_grade(text)
 
     # lca
     response['lca'] = get_lexical_complexity_analysis_sanitized(text, lemmatizer)
@@ -45,5 +41,5 @@ text = ("Playing games has always been thought to be important to "
     "interpersonal relationships but is also a wonderful way "
     "to release built up tension.")
 
-response = extract_features_from_text(text)
-print(response)
+# response = extract_features_from_text(text)
+# print(response)
