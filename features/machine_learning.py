@@ -116,6 +116,7 @@ def features_importances(dataset_name):
     plt.ylabel("Price")
     plt.legend()
     plt.savefig('features_importances/' + 'linear_regression_' + dataset_name.split(".csv")[0])
+    plt.clf()
 
 features_importances('result_appliances.csv')
 features_importances('result_fashion.csv')
