@@ -118,9 +118,40 @@ def features_importances(dataset_name):
     plt.savefig('features_importances/' + 'linear_regression_' + dataset_name.split(".csv")[0])
     plt.clf()
 
-features_importances('result_appliances.csv')
-features_importances('result_fashion.csv')
-features_importances('result_luxury_beauty.csv')
-features_importances('result_prime.csv')
-features_importances('result_software.csv')
-features_importances('result_music.csv')
+    r_squared = polyfit(y_test, predictions, 1)['determination']
+    return r_squared
+
+def polyfit(x, y, degree):
+    results = {}
+
+    coeffs = np.polyfit(x, y, degree)
+
+     # Polynomial Coefficients
+    results['polynomial'] = coeffs.tolist()
+
+    # r-squared
+    p = np.poly1d(coeffs)
+    # fit values, and mean
+    yhat = p(x)                         # or [p(z) for z in x]
+    ybar = np.sum(y)/len(y)          # or sum(y)/len(y)
+    ssreg = np.sum((yhat-ybar)**2)   # or sum([ (yihat - ybar)**2 for yihat in yhat])
+    sstot = np.sum((y - ybar)**2)    # or sum([ (yi - ybar)**2 for yi in y])
+    results['determination'] = ssreg / sstot
+
+    return results
+
+def compose_r_2_csv():
+    r_2 = []
+
+    r_2.append(features_importances('result_appliances.csv'))
+    r_2.append(features_importances('result_fashion.csv'))
+    r_2.append(features_importances('result_luxury_beauty.csv'))
+    r_2.append(features_importances('result_prime.csv'))
+    r_2.append(features_importances('result_software.csv'))
+    r_2.append(features_importances('result_music.csv'))
+
+    df_grouped_features = pd.DataFrame(data=[r_2], index=None, columns=['result_appliances', 'result_fashion',
+                                    'result_luxury_beauty', 'result_prime', 'result_software', 'result_music'])
+    df_grouped_features.to_csv('r_2_values.csv', index=False)
+
+compose_r_2_csv()
