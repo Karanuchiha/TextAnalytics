@@ -111,8 +111,9 @@ def features_importances(dataset_name):
     print('Mean Predicted Price', predictions.mean())
     print('Median Predicted Price', np.median(predictions))
     
-    plt.plot([i for i in range(len(y_test))], y_test, label='Training data')
+    plt.plot([i for i in range(len(y_test))], y_test, label='Actual Prices')
     plt.plot([i for i in range(len(predictions))], predictions, label='Predictions')
+    plt.xlabel("Observation number")
     plt.ylabel("Price")
     plt.legend()
     plt.savefig('features_importances/' + 'linear_regression_' + dataset_name.split(".csv")[0])
